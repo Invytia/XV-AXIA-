@@ -29,28 +29,52 @@
             scroll-behavior: smooth;
         }
 
-        /* ====== ANIMACIONES GENERALES ====== */
+        /* ====== ANIMACIONES IMPACTANTES ====== */
         .aos {
             opacity: 0;
-            transform: translateY(35px);
-            transition: opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1), transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+            transform: translateY(60px) scale(0.95);
+            transition: opacity 1.2s cubic-bezier(0.2, 0.8, 0.2, 1), transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
             will-change: opacity, transform;
         }
         .aos.visible {
             opacity: 1;
-            transform: translateY(0);
+            transform: translateY(0) scale(1);
         }
+        
         .aos-zoom {
             opacity: 0;
-            transform: scale(0.92);
-            transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+            transform: scale(0.8) rotate(-3deg);
+            transition: opacity 1.5s cubic-bezier(0.2, 0.8, 0.2, 1), transform 1.5s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
         .aos-zoom.visible {
             opacity: 1;
-            transform: scale(1);
+            transform: scale(1) rotate(0deg);
         }
 
-        /* ====== SOBRE REDISEÑADO (ROSE GOLD) ====== */
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); text-shadow: 0 0 15px rgba(183,110,121,0.4); }
+            50% { transform: scale(1.05); text-shadow: 0 0 35px rgba(183,110,121,0.8); }
+        }
+        .main-title { animation: breathe 4s infinite ease-in-out; }
+
+        @keyframes slowZoom {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.15); }
+        }
+
+        @keyframes floatPhoto {
+            0%, 100% { transform: translateY(0px); box-shadow: 0 15px 35px rgba(183,110,121,0.15); }
+            50% { transform: translateY(-20px); box-shadow: 0 35px 50px rgba(183,110,121,0.3); }
+        }
+        .floating-photo { animation: floatPhoto 6s ease-in-out infinite; }
+
+        @keyframes shine {
+            0% { left: -60%; }
+            20% { left: 150%; }
+            100% { left: 150%; }
+        }
+
+        /* ====== SOBRE REDISEÑADO ====== */
         #envelope-screen {
             position: fixed; top: 0; left: 0;
             width: 100%; height: 100%;
@@ -68,14 +92,8 @@
         }
         @keyframes envTwinkle {
             0%, 100% { opacity: 0.15; transform: scale(1); }
-            50% { opacity: 0.9; transform: scale(1.4); }
+            50% { opacity: 1; transform: scale(1.6); box-shadow: 0 0 10px #f3e5ab; }
         }
-
-        .env-corner-svg { position: absolute; opacity: 0.55; pointer-events: none; }
-        .env-corner-svg.tl { top: -10px; left: -10px; }
-        .env-corner-svg.tr { top: -10px; right: -10px; transform: scaleX(-1); }
-        .env-corner-svg.bl { bottom: -10px; left: -10px; transform: scaleY(-1); }
-        .env-corner-svg.br { bottom: -10px; right: -10px; transform: scale(-1); }
 
         .env-sparkle {
             position: absolute; pointer-events: none; z-index: 8;
@@ -83,7 +101,7 @@
         }
         @keyframes envSparklePulse {
             0%,100%{opacity:0.2;transform:scale(0.6) rotate(0deg);}
-            50%{opacity:1;transform:scale(1.1) rotate(25deg);}
+            50%{opacity:1;transform:scale(1.2) rotate(35deg); filter: drop-shadow(0 0 8px #d4af37);}
         }
 
         .envelope-wrapper {
@@ -92,63 +110,64 @@
             width: 310px;
             transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
         }
-        .envelope-wrapper:hover { transform: translateY(-6px) scale(1.02); }
+        .envelope-wrapper:hover { transform: translateY(-10px) scale(1.05); }
 
         .envelope-body { position: relative; width: 310px; height: 210px; margin: 0 auto; }
         .env-svg-main {
             width: 310px; height: 210px;
-            filter: drop-shadow(0 20px 50px rgba(0,0,0,0.6)) drop-shadow(0 6px 15px rgba(183,110,121,0.25));
+            filter: drop-shadow(0 20px 50px rgba(0,0,0,0.8)) drop-shadow(0 6px 15px rgba(183,110,121,0.4));
             transition: filter 0.4s ease;
         }
 
         .env-name-label {
-            position: absolute; top: 78px; left: 0; right: 0; text-align: center;
-            font-family: 'Pinyon Script', cursive; font-size: 38px;
+            position: absolute; top: 70px; left: 0; right: 0; text-align: center;
+            font-family: 'Pinyon Script', cursive; font-size: 46px; /* Letra más grande */
             color: #ffffff;
-            text-shadow: 0 0 15px rgba(212,175,55,0.6), 0 2px 4px rgba(0,0,0,0.4);
+            text-shadow: 0 0 20px rgba(212,175,55,0.8), 0 3px 6px rgba(0,0,0,0.6);
             pointer-events: none; z-index: 15;
+            animation: breathe 3s infinite ease-in-out;
         }
         .env-date-label {
-            position: absolute; top: 125px; left: 0; right: 0; text-align: center;
-            font-family: 'Cinzel', serif; font-size: 8px; letter-spacing: 4px;
-            color: rgba(255,255,255,0.8); pointer-events: none; z-index: 15; text-transform: uppercase;
+            position: absolute; top: 135px; left: 0; right: 0; text-align: center;
+            font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 5px; /* Letra más grande */
+            color: rgba(255,255,255,0.9); pointer-events: none; z-index: 15; text-transform: uppercase;
         }
 
         .env-flap-group {
             transform-origin: 155px 0px; transform-box: fill-box;
-            transition: transform 0.7s cubic-bezier(0.4,0,0.2,1) 0.1s;
+            transition: transform 0.8s cubic-bezier(0.4,0,0.2,1) 0.1s;
         }
         .envelope-wrapper.open .env-flap-group { transform: rotateX(-176deg); }
 
         .letter-peek {
             position: absolute; left: 50%; transform: translateX(-50%);
             width: 270px; background: linear-gradient(180deg, #fff9f0 0%, #fef5e7 100%);
-            border-radius: 3px; border: 1px solid rgba(212,175,55,0.3);
+            border-radius: 3px; border: 1px solid rgba(212,175,55,0.5);
             z-index: 5; overflow: hidden;
             top: 20px; height: 0; opacity: 0;
             transition: height 0.6s cubic-bezier(0.22,1,0.36,1) 0.7s,
                         opacity 0.4s ease 0.7s, top 0.6s cubic-bezier(0.22,1,0.36,1) 0.7s;
             display: flex; align-items: flex-start; justify-content: center;
-            padding-top: 12px;
-            box-shadow: 0 -8px 30px rgba(0,0,0,0.3);
+            padding-top: 15px;
+            box-shadow: 0 -8px 40px rgba(0,0,0,0.4);
         }
-        .envelope-wrapper.open .letter-peek { height: 80px; opacity: 1; top: -40px; }
+        .envelope-wrapper.open .letter-peek { height: 90px; opacity: 1; top: -50px; }
         .letter-peek-inner { text-align: center; opacity: 0; transition: opacity 0.4s ease 1.1s; }
         .envelope-wrapper.open .letter-peek-inner { opacity: 1; }
-        .letter-peek-name { font-family: 'Pinyon Script', cursive; font-size: 26px; color: var(--text-rose); line-height: 1.2; }
-        .letter-peek-date { font-family: 'Cinzel', serif; font-size: 7.5px; letter-spacing: 3px; color: #b08d42; text-transform: uppercase; }
+        .letter-peek-name { font-family: 'Pinyon Script', cursive; font-size: 32px; color: var(--text-rose); line-height: 1.2; text-shadow: 0 0 5px rgba(183,110,121,0.2); }
+        .letter-peek-date { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 4px; color: #b08d42; text-transform: uppercase; margin-top: 5px; }
 
         .wax-seal {
             position: absolute; top: 143px; left: 50%; transform: translateX(-50%);
-            width: 62px; height: 62px; z-index: 20;
+            width: 68px; height: 68px; z-index: 20;
             transition: transform 0.5s cubic-bezier(0.34,1.56,0.64,1) 0.2s, opacity 0.4s ease 0.15s;
         }
         .envelope-wrapper.open .wax-seal { transform: translateX(-50%) scale(0) rotate(45deg); opacity: 0; }
 
         .hint-text {
-            margin-top: 30px; text-align: center;
-            font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 4px;
-            color: rgba(212,175,55,0.7); animation: pulse 2.5s infinite; 
+            margin-top: 40px; text-align: center;
+            font-family: 'Cinzel', serif; font-size: 14px; letter-spacing: 5px; /* Más grande */
+            color: rgba(243, 229, 171, 0.9); animation: breathe 2s infinite; 
             text-transform: uppercase; width: 310px;
         }
 
@@ -163,7 +182,6 @@
         }
         body.content-active #main-invitation { opacity: 1; transform: translateY(0); }
 
-        /* Contenedor principal que simula la hoja */
         .invitation-content {
             max-width: 500px; width: 100%;
             background: #ffffff;
@@ -174,190 +192,191 @@
             padding-bottom: 60px;
         }
 
-        /* Secciones Dinámicas de Color */
-        .color-section {
-            padding: 50px 30px;
-            position: relative;
-            text-align: center;
-        }
+        .color-section { padding: 60px 30px; position: relative; text-align: center; }
         .bg-white { background: #ffffff; }
         .bg-rosegold { background: var(--rosegold-light); }
         .bg-gold { background: var(--gold-light); }
 
         /* ====== FOTOS Y SEPARADORES ====== */
         .hero-photo-wrap {
-            width: 100%; height: 450px;
-            position: relative;
-            overflow: hidden;
-            border-bottom: 2px solid var(--text-rose);
+            width: 100%; height: 500px;
+            position: relative; overflow: hidden;
+            border-bottom: 3px solid var(--text-rose);
         }
         .hero-photo-wrap::after {
             content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 40%;
             background: linear-gradient(to top, #ffffff, transparent);
         }
-        .hero-photo { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+        .hero-photo { 
+            width: 100%; height: 100%; object-fit: cover; object-position: top; 
+            animation: slowZoom 25s infinite alternate linear;
+        }
 
         .separador-foto {
-            width: 90%; height: 280px;
-            margin: 40px auto;
-            border-radius: 120px 120px 10px 10px;
-            overflow: hidden;
-            border: 4px solid #fff;
-            box-shadow: 0 15px 35px rgba(183,110,121,0.15);
+            width: 90%; height: 320px; margin: 40px auto;
+            border-radius: 120px 120px 10px 10px; overflow: hidden;
+            border: 5px solid #fff; 
         }
         .separador-foto img { width: 100%; height: 100%; object-fit: cover; }
         
         .separador-foto-alt {
-            width: 90%; height: 280px;
-            margin: 40px auto;
-            border-radius: 10px 10px 120px 120px;
-            overflow: hidden;
-            border: 4px solid #fff;
-            box-shadow: 0 15px 35px rgba(212,175,55,0.15);
+            width: 90%; height: 320px; margin: 40px auto;
+            border-radius: 10px 10px 120px 120px; overflow: hidden;
+            border: 5px solid #fff;
         }
         .separador-foto-alt img { width: 100%; height: 100%; object-fit: cover; }
 
         .separador-foto-circulo {
-            width: 220px; height: 220px;
-            margin: 40px auto;
-            border-radius: 50%;
-            overflow: hidden;
-            border: 4px solid #fff;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            width: 260px; height: 260px; margin: 40px auto;
+            border-radius: 50%; overflow: hidden; border: 5px solid #fff;
         }
         .separador-foto-circulo img { width: 100%; height: 100%; object-fit: cover; }
 
-        /* ====== TIPOGRAFÍA ====== */
+        /* ====== TIPOGRAFÍA MÁS GRANDE ====== */
         .section-heading {
-            font-family: 'Bodoni Moda', serif; font-style: italic; font-size: 28px;
+            font-family: 'Bodoni Moda', serif; font-style: italic; font-size: 38px; /* Era 28px */
             font-weight: 500; letter-spacing: 1px; color: var(--text-rose);
-            margin-bottom: 16px; line-height: 1.3;
+            margin-bottom: 20px; line-height: 1.3; text-shadow: 0 0 12px rgba(183,110,121,0.3);
         }
         .section-tag {
-            font-family: 'Bodoni Moda', serif; font-style: italic; font-size: 16px;
-            letter-spacing: 3px; color: var(--text-gold); margin-bottom: 14px; font-weight: 500;
+            font-family: 'Bodoni Moda', serif; font-style: italic; font-size: 20px; /* Era 16px */
+            letter-spacing: 4px; color: var(--text-gold); margin-bottom: 18px; font-weight: 600; text-shadow: 0 0 8px rgba(212,175,55,0.4);
         }
         .main-title {
-            font-family:'Pinyon Script',cursive; font-size: 78px; color: var(--text-rose);
-            margin-bottom: 2px; text-shadow: 0 2px 4px rgba(183,110,121,0.1); line-height: 1;
+            font-family:'Pinyon Script',cursive; font-size: 85px; /* Era 78px */
+            color: var(--text-rose); margin-bottom: 10px; line-height: 1;
         }
-        .phrase { font-family:'EB Garamond','Cormorant Garamond',serif; font-style:italic; font-size:19px; color:var(--text-muted); line-height:1.7; margin-bottom:20px; font-weight:400; padding: 0 15px; }
-        .family-names { font-family:'Cormorant Garamond',serif; font-size:20px; font-weight:400; font-style:italic; color:var(--text-deep); line-height:1.75; margin-top:6px; }
-        
+        @media (max-width: 400px) { .main-title { font-size: 68px; } }
+
+        .phrase { 
+            font-family:'EB Garamond','Cormorant Garamond',serif; font-style:italic; 
+            font-size:24px; /* Era 19px */ color:var(--text-muted); 
+            line-height:1.6; margin-bottom:25px; font-weight:400; padding: 0 10px; 
+        }
+        .family-names { 
+            font-family:'Cormorant Garamond',serif; font-size:26px; /* Era 20px */ 
+            font-weight:400; font-style:italic; color:var(--text-deep); line-height:1.75; margin-top:8px; 
+        }
         .info-label { 
-            font-family: 'Bodoni Moda', serif; font-style: italic; font-size: 11px; 
-            letter-spacing: 3px; color: var(--text-gold); text-transform: uppercase; margin-bottom: 8px; font-weight: 600; 
+            font-family: 'Bodoni Moda', serif; font-style: italic; font-size: 14px; /* Era 11px */
+            letter-spacing: 4px; color: var(--text-gold); text-transform: uppercase; margin-bottom: 10px; font-weight: 600; 
         }
-        .info-block { margin-bottom: 25px; }
+        .info-block { margin-bottom: 35px; }
 
         /* ====== DIVIDER ====== */
-        .divider-ornate { display:flex; align-items:center; justify-content:center; gap:8px; margin: 35px auto; width: 80%; }
-        .divider-ornate::before,.divider-ornate::after { content:''; flex:1; height:1px; background:linear-gradient(to right,transparent,var(--text-rose)); }
+        .divider-ornate { display:flex; align-items:center; justify-content:center; gap:12px; margin: 45px auto; width: 85%; }
+        .divider-ornate::before,.divider-ornate::after { content:''; flex:1; height:2px; background:linear-gradient(to right,transparent,var(--text-rose)); }
         .divider-ornate::after { background:linear-gradient(to left,transparent,var(--text-rose)); }
-        .divider-ornate-diamond { width:6px; height:6px; background:var(--text-gold); transform:rotate(45deg); flex-shrink:0; }
+        .divider-ornate-diamond { width:8px; height:8px; background:var(--text-gold); transform:rotate(45deg); flex-shrink:0; box-shadow: 0 0 10px var(--text-gold); }
 
-        /* ====== COUNTDOWN ====== */
-        .countdown-grid { display:flex; justify-content:center; gap:12px; margin: 20px auto; max-width:340px; }
-        .countdown-item { flex:1; background: #fff; border: 1px solid rgba(212,175,55,0.3); padding:15px 5px; border-radius:8px; box-shadow: 0 5px 15px rgba(0,0,0,0.03); }
-        .countdown-number { font-family:'Cinzel',serif; font-size:26px; font-weight:400; color:var(--text-rose); display:block; }
-        .countdown-label { font-family:'Montserrat',sans-serif; font-size:9px; text-transform:uppercase; letter-spacing:2px; color:var(--text-muted); font-weight:500; margin-top:4px; display:block; }
+        /* ====== COUNTDOWN MÁS GRANDE ====== */
+        .countdown-grid { display:flex; justify-content:center; gap:15px; margin: 25px auto; max-width:380px; }
+        .countdown-item { flex:1; background: #fff; border: 2px solid rgba(212,175,55,0.4); padding:18px 5px; border-radius:12px; box-shadow: 0 8px 20px rgba(212,175,55,0.15); }
+        .countdown-number { font-family:'Cinzel',serif; font-size:36px; /* Era 26px */ font-weight:600; color:var(--text-rose); display:block; text-shadow: 0 0 8px rgba(183,110,121,0.2); }
+        .countdown-label { font-family:'Montserrat',sans-serif; font-size:12px; /* Era 9px */ text-transform:uppercase; letter-spacing:2px; color:var(--text-muted); font-weight:600; margin-top:6px; display:block; }
 
-        /* ====== CALENDARIO NOVIEMBRE 2026 ====== */
+        /* ====== CALENDARIO MÁS GRANDE ====== */
         .calendar-widget {
-            margin-top: 25px; background: #fff; border: 1px solid rgba(183,110,121,0.2);
-            border-radius: 18px; overflow: hidden; box-shadow: 0 10px 30px rgba(183,110,121,0.08);
+            margin-top: 30px; background: #fff; border: 2px solid rgba(183,110,121,0.3);
+            border-radius: 20px; overflow: hidden; box-shadow: 0 15px 40px rgba(183,110,121,0.15);
         }
-        .calendar-header { padding: 20px; text-align: center; border-bottom: 1px solid rgba(183,110,121,0.1); }
-        .calendar-year { font-family:'Cinzel',serif; font-size:11px; letter-spacing:5px; text-transform:uppercase; color: var(--text-gold); }
-        .calendar-month { margin-top:5px; font-family: 'Pinyon Script', cursive; font-size:42px; color:var(--text-rose); }
-        .calendar-body { padding: 20px 16px; }
-        .calendar-days-header { display:grid; grid-template-columns:repeat(7,1fr); margin-bottom:12px; }
-        .calendar-day-name { text-align:center; font-family:'Montserrat', sans-serif; font-size:9px; letter-spacing:1.5px; color:var(--text-muted); text-transform:uppercase; }
-        .calendar-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:8px; }
+        .calendar-header { padding: 25px; text-align: center; border-bottom: 1px solid rgba(183,110,121,0.2); }
+        .calendar-year { font-family:'Cinzel',serif; font-size:14px; letter-spacing:6px; text-transform:uppercase; color: var(--text-gold); font-weight: 600; }
+        .calendar-month { margin-top:8px; font-family: 'Pinyon Script', cursive; font-size:52px; /* Era 42px */ color:var(--text-rose); text-shadow: 0 0 10px rgba(183,110,121,0.2); }
+        .calendar-body { padding: 25px 20px; }
+        .calendar-days-header { display:grid; grid-template-columns:repeat(7,1fr); margin-bottom:15px; }
+        .calendar-day-name { text-align:center; font-family:'Montserrat', sans-serif; font-size:11px; letter-spacing:2px; color:var(--text-muted); text-transform:uppercase; font-weight: 600;}
+        .calendar-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:10px; }
         .cal-day {
-            width: 36px; height: 36px; margin: auto; display: flex; align-items: center; justify-content: center;
-            font-family: 'Cormorant Garamond', serif; font-size: 18px; color: var(--text-deep); border-radius: 50%;
+            width: 40px; height: 40px; margin: auto; display: flex; align-items: center; justify-content: center;
+            font-family: 'Cormorant Garamond', serif; font-size: 22px; /* Era 18px */ color: var(--text-deep); border-radius: 50%; font-weight: 600;
         }
         .cal-day.empty { opacity: 0; }
         .cal-day.highlight {
             background: linear-gradient(135deg, var(--text-rose), #94535d);
-            color: #fff; font-weight: 600; box-shadow: 0 4px 12px rgba(183,110,121,0.4);
+            color: #fff; font-weight: 700; box-shadow: 0 6px 15px rgba(183,110,121,0.5); transform: scale(1.1);
         }
         
-        .btn-action {
-            margin-top: 20px; width: 100%; border: 1px solid var(--text-gold); border-radius: 12px;
-            padding: 15px; background: transparent; color: var(--text-deep);
-            display: flex; align-items: center; justify-content: center; gap: 10px;
-            cursor: pointer; transition: .3s ease; font-family:'Cinzel',serif; font-size:10px;
-            letter-spacing:2px; text-transform:uppercase;
+        /* ====== BOTONES ANIMADOS Y MÁS GRANDES ====== */
+        .btn-action, .btn-primary {
+            position: relative; overflow: hidden; font-size: 14px; /* Era 10px */ letter-spacing: 3px; font-weight: 600; padding: 18px 26px; border-radius: 14px;
         }
-        .btn-action:hover { background: var(--text-gold); color: #fff; }
-        .btn-action svg { width: 16px; height: 16px; fill: currentColor; }
+        .btn-action {
+            margin-top: 25px; width: 100%; border: 2px solid var(--text-gold);
+            background: transparent; color: var(--text-deep);
+            display: flex; align-items: center; justify-content: center; gap: 12px;
+            cursor: pointer; transition: .3s ease; font-family:'Cinzel',serif; text-transform:uppercase;
+        }
+        .btn-action:hover { background: var(--text-gold); color: #fff; box-shadow: 0 0 20px rgba(212,175,55,0.5); }
+        .btn-action svg { width: 20px; height: 20px; fill: currentColor; }
         
         .btn-primary {
-            display:inline-flex; align-items:center; justify-content:center; gap:12px; width:100%;
-            padding:16px 24px; background:linear-gradient(135deg, var(--text-rose), #94535d);
-            color:#fff; border:none; font-family:'Cinzel',serif; font-size:10px; letter-spacing:3px;
-            text-transform:uppercase; cursor:pointer; border-radius:12px;
-            box-shadow:0 8px 20px rgba(183,110,121,0.3); transition:all 0.4s ease;
+            display:inline-flex; align-items:center; justify-content:center; gap:12px; width:100%; margin-top: 15px;
+            background:linear-gradient(135deg, var(--text-rose), #94535d);
+            color:#fff; border:none; font-family:'Cinzel',serif;
+            text-transform:uppercase; cursor:pointer;
+            box-shadow:0 10px 25px rgba(183,110,121,0.4); transition:all 0.4s ease;
         }
-        .btn-primary:hover { box-shadow:0 10px 25px rgba(183,110,121,0.4); transform:translateY(-2px); }
-        .btn-primary svg { width:18px; height:18px; fill:#fff; flex-shrink:0; }
+        .btn-primary::after {
+            content: ""; position: absolute; top: -50%; left: -60%; width: 20%; height: 200%;
+            background: rgba(255,255,255,0.4); transform: rotate(30deg);
+            animation: shine 3s infinite;
+        }
+        .btn-primary:hover { box-shadow:0 12px 30px rgba(183,110,121,0.6); transform:translateY(-3px); }
+        .btn-primary svg { width:22px; height:22px; fill:#fff; flex-shrink:0; }
 
         /* ====== UBICACIONES DINÁMICAS ====== */
-        .location-dynamic { margin-bottom: 40px; }
-        .loc-title { font-family: 'Cinzel', serif; font-size: 18px; color: var(--text-rose); margin-bottom: 5px; letter-spacing: 2px; }
-        .loc-name { font-family: 'Bodoni Moda', serif; font-style: italic; font-size: 24px; color: var(--text-deep); margin-bottom: 5px; }
-        .loc-time { font-family: 'Montserrat', sans-serif; font-size: 12px; color: var(--text-gold); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 15px; font-weight: 500; }
-        .loc-map-wrap { border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); margin-bottom: 15px; height: 200px; border: 2px solid #fff; }
+        .location-dynamic { margin-bottom: 50px; }
+        .loc-title { font-family: 'Cinzel', serif; font-size: 22px; color: var(--text-rose); margin-bottom: 8px; letter-spacing: 3px; font-weight: 600; text-shadow: 0 0 10px rgba(183,110,121,0.2); }
+        .loc-name { font-family: 'Bodoni Moda', serif; font-style: italic; font-size: 32px; color: var(--text-deep); margin-bottom: 10px; }
+        .loc-time { font-family: 'Montserrat', sans-serif; font-size: 15px; color: var(--text-gold); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 20px; font-weight: 600; }
+        .loc-map-wrap { border-radius: 20px; overflow: hidden; box-shadow: 0 15px 40px rgba(0,0,0,0.2); margin-bottom: 20px; height: 250px; border: 3px solid #fff; }
 
-        /* ====== ITINERARIO ====== */
-        .itinerario-timeline { position:relative; padding:0; margin-top: 30px; }
+        /* ====== ITINERARIO MÁS GRANDE ====== */
+        .itinerario-timeline { position:relative; padding:0; margin-top: 40px; }
         .itinerario-timeline::before {
-            content:''; position:absolute; left:50%; top:0; bottom:0; width:1px;
+            content:''; position:absolute; left:50%; top:0; bottom:0; width:2px;
             background:linear-gradient(to bottom, transparent, var(--text-gold) 10%, var(--text-gold) 90%, transparent); transform:translateX(-50%);
         }
-        .itin-row { display:flex; align-items:center; justify-content:center; position:relative; margin-bottom:15px; }
-        .itin-hora { width:calc(50% - 26px); text-align:right; padding-right:16px; font-family:'Cinzel',serif; font-size:10px; font-weight:500; letter-spacing:1.5px; color:var(--text-rose); }
-        .itin-node { width:26px; height:26px; flex-shrink:0; position:relative; z-index:2; display:flex; align-items:center; justify-content:center; }
-        .itin-node::before { content:'◆'; font-size:18px; color:var(--text-gold); line-height:1; text-shadow: 0 0 10px rgba(212,175,55,0.4); }
-        .itin-evento { width:calc(50% - 26px); padding-left:16px; text-align:left; }
-        .itin-evento-nombre { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:22px; color:var(--text-deep); line-height:1.2; }
+        .itin-row { display:flex; align-items:center; justify-content:center; position:relative; margin-bottom:25px; }
+        .itin-hora { width:calc(50% - 30px); text-align:right; padding-right:20px; font-family:'Cinzel',serif; font-size:16px; /* Era 10px */ font-weight:600; letter-spacing:2px; color:var(--text-rose); }
+        .itin-node { width:30px; height:30px; flex-shrink:0; position:relative; z-index:2; display:flex; align-items:center; justify-content:center; }
+        .itin-node::before { content:'◆'; font-size:24px; color:var(--text-gold); line-height:1; text-shadow: 0 0 15px rgba(212,175,55,0.8); animation: breathe 2s infinite alternate;}
+        .itin-evento { width:calc(50% - 30px); padding-left:20px; text-align:left; }
+        .itin-evento-nombre { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:28px; /* Era 22px */ color:var(--text-deep); line-height:1.2; font-weight: 600; }
 
-        /* ====== VESTIMENTA Y REGALOS ====== */
-        .icon-circle { width: 60px; height: 60px; border-radius: 50%; background: #fff; border: 1px solid var(--text-gold); display: flex; align-items: center; justify-content: center; margin: 0 auto 15px auto; box-shadow: 0 5px 15px rgba(212,175,55,0.15); }
-        .icon-circle svg { width: 30px; height: 30px; fill: var(--text-rose); }
-        .dress-code-text { font-family: 'Cinzel', serif; font-size: 16px; letter-spacing: 4px; color: var(--text-deep); text-transform: uppercase; margin-bottom: 8px; }
+        /* ====== VESTIMENTA Y REGALOS MÁS GRANDES (Sin Iconos) ====== */
+        .dress-code-text { font-family: 'Cinzel', serif; font-size: 26px; /* Era 16px */ letter-spacing: 5px; color: var(--text-deep); text-transform: uppercase; margin-bottom: 12px; font-weight: 600; text-shadow: 0 0 10px rgba(0,0,0,0.1); }
 
         /* ====== FORMULARIOS ====== */
-        .rsvp-input-wrap { margin-bottom: 18px; text-align: left; }
-        .rsvp-input-label { font-family:'Cinzel',serif; font-size:9px; letter-spacing:2px; color:var(--text-rose); text-transform:uppercase; font-weight:600; display:block; margin-bottom:8px; }
+        .rsvp-input-wrap { margin-bottom: 22px; text-align: left; }
+        .rsvp-input-label { font-family:'Cinzel',serif; font-size:12px; /* Era 9px */ letter-spacing:3px; color:var(--text-rose); text-transform:uppercase; font-weight:700; display:block; margin-bottom:10px; }
         .rsvp-input, .rsvp-select { 
-            width:100%; padding:14px 16px; font-family:'Cormorant Garamond',serif; font-size:18px; font-style:italic; 
-            color:var(--text-deep); background:#fff; border:1px solid rgba(183,110,121,0.3); border-radius:8px; 
-            outline:none; transition:border-color 0.3s, box-shadow 0.3s; 
+            width:100%; padding:18px 20px; font-family:'Cormorant Garamond',serif; font-size:20px; /* Era 18px */ font-style:italic; 
+            color:var(--text-deep); background:#fff; border:2px solid rgba(183,110,121,0.4); border-radius:12px; 
+            outline:none; transition:border-color 0.3s, box-shadow 0.3s; font-weight: 500;
         }
-        .rsvp-input:focus, .rsvp-select:focus { border-color:var(--text-rose); box-shadow:0 0 0 3px rgba(183,110,121,0.1); }
+        .rsvp-input:focus, .rsvp-select:focus { border-color:var(--text-rose); box-shadow:0 0 15px rgba(183,110,121,0.3); }
         
         /* ====== EXTRAS ====== */
         #music-control-btn {
-            position:fixed; bottom:25px; right:25px; width:50px; height:50px; border-radius:50%;
-            background:rgba(183,110,121,0.9); border:2px solid #fff; color:#fff;
+            position:fixed; bottom:25px; right:25px; width:60px; height:60px; border-radius:50%;
+            background:rgba(183,110,121,0.95); border:2px solid #fff; color:#fff;
             display:flex; justify-content:center; align-items:center; cursor:pointer; z-index:999;
-            box-shadow:0 4px 15px rgba(0,0,0,0.2); opacity:0; visibility:hidden;
+            box-shadow:0 6px 20px rgba(0,0,0,0.3), 0 0 15px rgba(183,110,121,0.6); opacity:0; visibility:hidden;
             transition:opacity 0.5s,visibility 0.5s,transform 0.3s;
         }
-        #music-control-btn:hover { transform:scale(1.1); }
+        #music-control-btn:hover { transform:scale(1.15) rotate(10deg); }
         #music-control-btn.visible { opacity:1; visibility:visible; }
-        #music-control-btn svg { width:22px; height:22px; fill:#fff; }
+        #music-control-btn svg { width:28px; height:28px; fill:#fff; }
         
         #glitter-canvas { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:100; opacity:0; transition:opacity 0.8s; }
         #glitter-canvas.visible { opacity:1; }
         
-        .flower-petal { position:absolute; border-radius:150% 0 150% 0; pointer-events:none; animation:float-up infinite ease-in; opacity:0; z-index: 101; }
-        @keyframes float-up { 0%{transform:translateY(0) translateX(0) rotate(0deg) scale(0.5);opacity:0} 15%,85%{opacity:0.7} 100%{transform:translateY(-100vh) translateX(60px) rotate(360deg) scale(1);opacity:0} }
+        .flower-petal { position:absolute; border-radius:150% 0 150% 0; pointer-events:none; animation:float-up infinite linear; opacity:0; z-index: 101; }
+        @keyframes float-up { 0%{transform:translateY(0) translateX(0) rotate(0deg) scale(0.5);opacity:0} 10%{opacity:0.85} 90%{opacity:0.85} 100%{transform:translateY(-120vh) translateX(100px) rotate(720deg) scale(1.2);opacity:0} }
 
-        .invitation-footer { font-family:'Cinzel',serif; font-size:10px; letter-spacing:4px; color:var(--text-muted); margin-top:20px; font-weight:500; text-transform:uppercase; text-align: center; }
+        .invitation-footer { font-family:'Cinzel',serif; font-size:14px; letter-spacing:5px; color:var(--text-muted); margin-top:30px; font-weight:700; text-transform:uppercase; text-align: center; }
     </style>
 </head>
 <body>
@@ -367,27 +386,18 @@
         <svg id="music-icon" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
     </button>
 
-    <!-- SOBRE INTRODUCTORIO -->
+    <!-- SOBRE INTRODUCTORIO (SIN ESQUINAS) -->
     <div id="envelope-screen">
         <div id="env-stars"></div>
-        
-        <!-- Esquinas Decorativas -->
-        <svg class="env-corner-svg tl" width="130" height="130" viewBox="0 0 130 130" fill="none">
-            <path d="M10 65 C10 30 40 10 65 10 C50 35 35 50 10 65Z" fill="#b76e79" opacity="0.35"/>
-            <path d="M10 65 C35 50 55 35 65 10 C45 20 20 45 10 65Z" fill="#d4af37" opacity="0.2"/>
-            <circle cx="32" cy="32" r="2.5" fill="#d4af37" opacity="0.6"/>
-        </svg>
-        <svg class="env-corner-svg tr" width="130" height="130" viewBox="0 0 130 130" fill="none">
-            <path d="M10 65 C10 30 40 10 65 10 C50 35 35 50 10 65Z" fill="#b76e79" opacity="0.35"/>
-            <path d="M10 65 C35 50 55 35 65 10 C45 20 20 45 10 65Z" fill="#d4af37" opacity="0.2"/>
-            <circle cx="32" cy="32" r="2.5" fill="#d4af37" opacity="0.6"/>
-        </svg>
 
         <div class="env-sparkle" style="--sd:2.2s;--sdelay:0s;top:60px;left:80px;">
-            <svg width="16" height="16" viewBox="0 0 24 24"><path d="M12 2L13.4 10.6L22 12L13.4 13.4L12 22L10.6 13.4L2 12L10.6 10.6Z" fill="#d4af37"/></svg>
+            <svg width="24" height="24" viewBox="0 0 24 24"><path d="M12 2L13.4 10.6L22 12L13.4 13.4L12 22L10.6 13.4L2 12L10.6 10.6Z" fill="#d4af37"/></svg>
         </div>
         <div class="env-sparkle" style="--sd:3s;--sdelay:0.8s;top:55px;right:90px;">
-            <svg width="12" height="12" viewBox="0 0 24 24"><path d="M12 2L13.4 10.6L22 12L13.4 13.4L12 22L10.6 13.4L2 12L10.6 10.6Z" fill="#e0bfb8"/></svg>
+            <svg width="20" height="20" viewBox="0 0 24 24"><path d="M12 2L13.4 10.6L22 12L13.4 13.4L12 22L10.6 13.4L2 12L10.6 10.6Z" fill="#e0bfb8"/></svg>
+        </div>
+        <div class="env-sparkle" style="--sd:2.5s;--sdelay:1.5s;bottom:80px;left:70px;">
+            <svg width="18" height="18" viewBox="0 0 24 24"><path d="M12 2L13.4 10.6L22 12L13.4 13.4L12 22L10.6 13.4L2 12L10.6 10.6Z" fill="#d4af37"/></svg>
         </div>
 
         <div class="envelope-wrapper" id="envelopeWrapperNew">
@@ -490,7 +500,7 @@
             <div class="color-section bg-white aos">
                 <div class="section-tag">Mis XV Años</div>
                 <h1 class="main-title">Axia Guadalupe</h1>
-                <p class="phrase" style="margin-top: 20px;">"Los momentos más felices se viven junto a quienes más queremos. Gracias por ser parte de nuestra celebración."</p>
+                <p class="phrase" style="margin-top: 25px;">"Los momentos más felices se viven junto a quienes más queremos. Gracias por ser parte de nuestra celebración."</p>
                 
                 <div class="divider-ornate"><div class="divider-ornate-diamond"></div></div>
 
@@ -504,12 +514,14 @@
                 </div>
             </div>
 
-            <!-- FOTO 1 SEPARADOR -->
+            <!-- FOTO 1 SEPARADOR CON ANIMACIÓN FLOTANTE -->
             <div class="color-section bg-rosegold aos">
-                <div class="separador-foto aos-zoom">
-                    <img src="assets/foto1.jpg" alt="Axia Sesión">
+                <div class="aos-zoom">
+                    <div class="separador-foto floating-photo">
+                        <img src="assets/foto1.jpg" alt="Axia Sesión">
+                    </div>
                 </div>
-                <div class="section-heading">Cuenta Regresiva</div>
+                <div class="section-heading" style="margin-top: 20px;">Cuenta Regresiva</div>
                 <div class="countdown-grid" id="countdown-timer">
                     <div class="countdown-item"><span class="countdown-number" id="days">00</span><span class="countdown-label">Días</span></div>
                     <div class="countdown-item"><span class="countdown-number" id="hours">00</span><span class="countdown-label">Hrs</span></div>
@@ -520,8 +532,8 @@
 
             <div class="color-section bg-white aos">
                 <div class="section-heading">Fecha</div>
-                <div style="font-family:'Cinzel',serif;font-size:32px;font-weight:400;color:var(--text-deep);letter-spacing:4px;">07 · NOV · 2026</div>
-                <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:20px;color:var(--text-muted);margin-top:5px;">Sábado</div>
+                <div style="font-family:'Cinzel',serif;font-size:38px;font-weight:600;color:var(--text-deep);letter-spacing:5px; text-shadow: 0 0 10px rgba(0,0,0,0.1);">07 · NOV · 2026</div>
+                <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:26px;color:var(--text-muted);margin-top:10px;">Sábado</div>
                 
                 <!-- CALENDARIO NOVIEMBRE 2026 -->
                 <div class="calendar-widget aos-zoom">
@@ -546,20 +558,22 @@
                 </button>
             </div>
 
-            <!-- FOTO 2 SEPARADOR -->
+            <!-- FOTO 2 SEPARADOR CON ANIMACIÓN FLOTANTE -->
             <div class="color-section bg-gold aos">
-                <div class="separador-foto-alt aos-zoom">
-                    <img src="assets/foto2.jpg" alt="Axia Elegante">
+                <div class="aos-zoom">
+                    <div class="separador-foto-alt floating-photo">
+                        <img src="assets/foto2.jpg" alt="Axia Elegante">
+                    </div>
                 </div>
                 
-                <div class="section-heading">Ubicaciones</div>
+                <div class="section-heading" style="margin-top: 20px;">Ubicaciones</div>
                 
                 <!-- Ceremonia -->
                 <div class="location-dynamic aos">
                     <div class="loc-title">Ceremonia</div>
                     <div class="loc-name">Parroquia Santa Cecilia</div>
                     <div class="loc-time">6:00 P.M.</div>
-                    <p style="font-family:'Montserrat',sans-serif; font-size:11px; margin-bottom:15px; color:var(--text-muted);">Tonalá, Jalisco</p>
+                    <p style="font-family:'Montserrat',sans-serif; font-size:14px; font-weight:600; margin-bottom:15px; color:var(--text-muted);">Tonalá, Jalisco</p>
                     <div class="loc-map-wrap">
                         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3733.9875151449282!2d-103.2393002244937!3d20.629365701375974!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8428b532e9f99d5f%3A0xf6eb1742108ede9f!2sParroquia%20Santa%20Cecilia!5e0!3m2!1ses-419!2smx!4v1784934448730!5m2!1ses-419!2smx" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
                     </div>
@@ -594,7 +608,7 @@
                     </div>
                     <div class="itin-row aos">
                         <span class="itin-hora">8:00 P.M.</span><div class="itin-node"></div>
-                        <div class="itin-evento"><span class="itin-evento-nombre" style="color:var(--text-rose);">Llegada Quinceañera</span></div>
+                        <div class="itin-evento"><span class="itin-evento-nombre" style="color:var(--text-rose); font-weight:700;">Llegada Quinceañera</span></div>
                     </div>
                     <div class="itin-row aos">
                         <span class="itin-hora">9:00 P.M.</span><div class="itin-node"></div>
@@ -615,36 +629,33 @@
                 </div>
             </div>
 
-            <!-- FOTO 3 SEPARADOR CIRCULAR -->
+            <!-- FOTO 3 SEPARADOR CIRCULAR CON ANIMACIÓN FLOTANTE -->
             <div class="color-section bg-rosegold aos">
-                <div class="separador-foto-circulo aos-zoom">
-                    <img src="assets/foto3.jpg" alt="Detalles Axia">
+                <div class="aos-zoom">
+                    <div class="separador-foto-circulo floating-photo">
+                        <img src="assets/foto3.jpg" alt="Detalles Axia">
+                    </div>
                 </div>
                 
-                <div class="section-heading" style="margin-top: 20px;">Código de Vestimenta</div>
-                <div class="icon-circle">
-                    <svg viewBox="0 0 24 24"><path d="M16 2l-1 3H9L8 2H4l2 5v13h12V7l2-5h-4M9.5 10a1.5 1.5 0 0 1 1.5 1.5A1.5 1.5 0 0 1 9.5 13 1.5 1.5 0 0 1 8 11.5 1.5 1.5 0 0 1 9.5 10m5 0a1.5 1.5 0 0 1 1.5 1.5A1.5 1.5 0 0 1 14.5 13 1.5 1.5 0 0 1 13 11.5 1.5 1.5 0 0 1 14.5 10Z"/></svg>
-                </div>
+                <!-- SIN ÍCONOS, TEXTOS MÁS GRANDES -->
+                <div class="section-heading" style="margin-top: 30px;">Código de Vestimenta</div>
                 <div class="dress-code-text">Formal</div>
-                <p style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:18px; color:var(--text-muted);">
-                    Reservar colores:<br>Rosa, Dorado y Verde Oliva
+                <p style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:24px; color:var(--text-muted); font-weight: 500;">
+                    Reservar colores:<br><span style="color: var(--text-rose); font-weight: 700;">Rosa, Dorado y Verde Oliva</span>
                 </p>
 
                 <div class="divider-ornate"><div class="divider-ornate-diamond"></div></div>
 
                 <div class="section-heading">Mesa de Regalos</div>
-                <div class="icon-circle">
-                    <svg viewBox="0 0 24 24"><path d="M20 6h-4V4c0-1.1-.9-2-2-2h-4c-1.1 0-2 .9-2 2v2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zM10 4h4v2h-4V4zm10 16H4v-9h16v9zm0-11H4V8h16v1z"/></svg>
-                </div>
-                <div class="dress-code-text" style="letter-spacing: 2px;">Lluvia de Sobres / Regalos</div>
-                <p style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:18px; color:var(--text-muted); padding: 0 10px;">
+                <div class="dress-code-text" style="letter-spacing: 3px;">Lluvia de Sobres / Regalos</div>
+                <p style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:24px; color:var(--text-muted); padding: 0 10px; font-weight: 500;">
                     El mejor regalo es tu presencia, pero si deseas tener un detalle conmigo, habrá un buzón en el salón.
                 </p>
             </div>
 
             <div class="color-section bg-white aos">
                 <div class="section-heading">Galería en Vivo</div>
-                <p style="font-family:'Cormorant Garamond',serif; font-size: 18px; color:var(--text-muted); margin-bottom: 20px;">
+                <p style="font-family:'Cormorant Garamond',serif; font-size: 24px; color:var(--text-muted); margin-bottom: 25px; line-height: 1.5;">
                     Sube las fotos y videos que tomes durante la fiesta a nuestra carpeta compartida.
                 </p>
                 <a href="https://drive.google.com/drive/folders/11cUcLZJm8zJ5YBWLpOVBXA-p2grzdTOl?usp=sharing" target="_blank" style="text-decoration: none;">
@@ -657,7 +668,7 @@
 
             <div class="color-section bg-gold aos">
                 <div class="section-heading">Confirmación</div>
-                <p style="font-family:'Cormorant Garamond',serif; font-size: 18px; color:var(--text-muted); margin-bottom: 20px;">
+                <p style="font-family:'Cormorant Garamond',serif; font-size: 24px; color:var(--text-muted); margin-bottom: 25px;">
                     Por favor confirma tu asistencia a más tardar el 15 de Octubre.
                 </p>
                 
@@ -680,7 +691,7 @@
 
             <div class="color-section bg-white aos">
                 <div class="section-heading">Muro de Deseos</div>
-                <p style="font-family:'Cormorant Garamond',serif; font-size: 18px; color:var(--text-muted); margin-bottom: 20px;">
+                <p style="font-family:'Cormorant Garamond',serif; font-size: 24px; color:var(--text-muted); margin-bottom: 25px;">
                     Déjame un mensaje especial para recordar este hermoso día.
                 </p>
                 <form id="wish-form" onsubmit="sendWishViaWhatsApp(event)">
@@ -690,7 +701,7 @@
                     </div>
                     <div class="rsvp-input-wrap">
                         <label class="rsvp-input-label" for="wish-mensaje">Mensaje</label>
-                        <textarea id="wish-mensaje" class="rsvp-input" placeholder="Escribe aquí tus buenos deseos..." required style="min-height: 120px; resize: vertical; padding-top: 15px;"></textarea>
+                        <textarea id="wish-mensaje" class="rsvp-input" placeholder="Escribe aquí tus buenos deseos..." required style="min-height: 140px; resize: vertical; padding-top: 15px;"></textarea>
                     </div>
                     <button type="submit" class="btn-primary" style="margin-top: 10px;">
                         <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
@@ -706,7 +717,7 @@
     <script>
         let isPlaying = false;
 
-        /* ===== GLITTER ===== */
+        /* ===== GLITTER SUPER INTENSO ===== */
         const canvas = document.getElementById('glitter-canvas');
         const ctx = canvas.getContext('2d');
         let glitterParticles = [];
@@ -718,23 +729,23 @@
         function makeParticle(x,y,burst){
             return {
                 x,y,
-                vx:(Math.random()-0.5)*(burst?3.5:0.8),
-                vy:-Math.random()*(burst?3:0.8)-(burst?0.5:0.15),
-                size:Math.random()*(burst?4:2.5)+1.2,
-                life:burst?1:Math.random()*0.5+0.5,
-                decay:Math.random()*(burst?0.016:0.007)+0.005,
+                vx:(Math.random()-0.5)*(burst?4:1),
+                vy:-Math.random()*(burst?4:1)-(burst?0.8:0.3),
+                size:Math.random()*(burst?6:3.5)+1.5,
+                life:burst?1:Math.random()*0.6+0.6,
+                decay:Math.random()*(burst?0.016:0.005)+0.005,
                 rotation:Math.random()*Math.PI*2,
-                rotSpeed:(Math.random()-0.5)*0.18,
-                // Tonos Rose Gold / Dorado
-                color:Math.random()>0.5?'212,175,55':'183,110,121' 
+                rotSpeed:(Math.random()-0.5)*0.25,
+                color:Math.random()>0.4?'212,175,55':'183,110,121' 
             };
         }
-        function createGlitterBurst(x,y){ for(let i=0;i<25;i++) glitterParticles.push(makeParticle(x,y,true)); }
+        function createGlitterBurst(x,y){ for(let i=0;i<35;i++) glitterParticles.push(makeParticle(x,y,true)); }
         function spawnAmbient(){
             if(!document.body.classList.contains('content-active')) return;
             const x = Math.random()*window.innerWidth;
-            const y = Math.random()*window.innerHeight*0.8 + window.scrollY;
-            for(let i=0;i<2;i++) glitterParticles.push(makeParticle(x+(Math.random()-0.5)*80,y+(Math.random()-0.5)*80,false));
+            const y = Math.random()*window.innerHeight*1.2 + window.scrollY - (window.innerHeight*0.1);
+            // Genera más partículas contínuamente para el efecto "lleno de brillos"
+            for(let i=0;i<6;i++) glitterParticles.push(makeParticle(x+(Math.random()-0.5)*180,y+(Math.random()-0.5)*180,false));
         }
         function drawGlitter(){
             ctx.clearRect(0,0,canvas.width,canvas.height);
@@ -747,15 +758,15 @@
                 const s = p.size;
                 
                 ctx.beginPath();
-                ctx.moveTo(0,-s*1.6); ctx.lineTo(s*0.45,-s*0.45);
-                ctx.lineTo(s*1.6,0); ctx.lineTo(s*0.45,s*0.45);
-                ctx.lineTo(0,s*1.6); ctx.lineTo(-s*0.45,s*0.45);
-                ctx.lineTo(-s*1.6,0); ctx.lineTo(-s*0.45,-s*0.45);
+                ctx.moveTo(0,-s*1.8); ctx.lineTo(s*0.45,-s*0.45);
+                ctx.lineTo(s*1.8,0); ctx.lineTo(s*0.45,s*0.45);
+                ctx.lineTo(0,s*1.8); ctx.lineTo(-s*0.45,s*0.45);
+                ctx.lineTo(-s*1.8,0); ctx.lineTo(-s*0.45,-s*0.45);
                 ctx.closePath();
-                ctx.fillStyle = `rgba(${p.color},${p.life*0.85})`;
+                ctx.fillStyle = `rgba(${p.color},${p.life*0.9})`;
                 ctx.fill();
                 
-                ctx.beginPath(); ctx.arc(0,0,s*0.3,0,Math.PI*2);
+                ctx.beginPath(); ctx.arc(0,0,s*0.35,0,Math.PI*2);
                 ctx.fillStyle = `rgba(255,255,255,${p.life})`; ctx.fill();
                 ctx.restore();
                 
@@ -764,7 +775,8 @@
             }
             requestAnimationFrame(drawGlitter);
         }
-        function startGlitter(){ canvas.classList.add('visible'); drawGlitter(); setInterval(spawnAmbient,300); }
+        // Intervalo de spawn muy rápido para llenarlo de brillos (80ms)
+        function startGlitter(){ canvas.classList.add('visible'); drawGlitter(); setInterval(spawnAmbient, 80); }
         document.addEventListener('click',e => { if(document.body.classList.contains('content-active')) createGlitterBurst(e.clientX,e.clientY); });
 
         /* ===== INTERSECTION OBSERVER (Animaciones al scrollear) ===== */
@@ -781,15 +793,15 @@
             elements.forEach(el => observer.observe(el));
         }
 
-        /* ===== SOBRE Y EVENTOS INICIALES ===== */
+        /* ===== EVENTOS INICIALES Y SOBRE ===== */
         (function(){
             const c = document.getElementById('env-stars');
             if (!c) return;
             c.style.cssText = 'position:absolute;inset:0;overflow:hidden;';
-            for (let i = 0; i < 70; i++) {
+            for (let i = 0; i < 90; i++) {
                 const s = document.createElement('div');
                 s.className = 'env-star';
-                const size = Math.random() * 2.5 + 0.8;
+                const size = Math.random() * 3 + 1;
                 s.style.cssText = `width:${size}px;height:${size}px;top:${Math.random()*100}%;left:${Math.random()*100}%;--d:${(Math.random()*3+1.5).toFixed(1)}s;--delay:-${(Math.random()*4).toFixed(1)}s;`;
                 c.appendChild(s);
             }
@@ -877,7 +889,7 @@
         setInterval(()=>{
             const left = target - Date.now();
             if(left < 0){ 
-                document.getElementById("countdown-timer").innerHTML="<div style='font-family:\"Cinzel\",serif;color:var(--text-rose);letter-spacing:2px;font-size:16px;padding:20px;'>¡Llegó el Gran Día!</div>"; 
+                document.getElementById("countdown-timer").innerHTML="<div style='font-family:\"Cinzel\",serif;color:var(--text-rose);letter-spacing:2px;font-size:18px;padding:20px; font-weight:600;'>¡Llegó el Gran Día!</div>"; 
                 return; 
             }
             const d=Math.floor(left/86400000), h=Math.floor(left%86400000/3600000), m=Math.floor(left%3600000/60000), s=Math.floor(left%60000/1000);
@@ -887,14 +899,14 @@
             document.getElementById("seconds").innerText = s < 10 ? "0"+s : s;
         }, 1000);
 
-        /* ===== PÉTALOS ===== */
+        /* ===== PÉTALOS MASIVOS ===== */
         function createFlowerPetals(){
             const c=document.getElementById('lanterns-container');
             const colores = ['#e0bfb8', '#d4af37', '#f4dbde', '#b76e79'];
-            for(let i=0; i<30; i++){
-                const p = document.createElement('div'), w = Math.random()*8+6;
+            for(let i=0; i<50; i++){
+                const p = document.createElement('div'), w = Math.random()*10+8;
                 p.className = 'flower-petal';
-                p.style.cssText = `width:${w}px;height:${w*1.3}px;left:${Math.random()*100}%;bottom:-30px;background-color:${colores[Math.floor(Math.random()*colores.length)]};animation-duration:${Math.random()*12+8}s;animation-delay:${Math.random()*6}s;opacity:0.75;`;
+                p.style.cssText = `width:${w}px;height:${w*1.4}px;left:${Math.random()*100}%;bottom:-50px;background-color:${colores[Math.floor(Math.random()*colores.length)]};animation-duration:${Math.random()*15+10}s;animation-delay:${Math.random()*8}s;`;
                 c.appendChild(p);
             }
         }
